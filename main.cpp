@@ -1,7 +1,7 @@
 /*Algorytmy i Struktury Danych*/
 /*Jakub Matuszko Grupa 5*/
-/*Uporz¹dkuj zadan¹ tablicê wielu powtarzaj¹cych siê elementów, tak aby zgromadziæ te same elementy
-zachowuj¹c kolejnoœæ ich pierwszego wyst¹pienia.*/
+/*Uporzadkuj zadane tablice wielu powtarzajacych sie elementow, tak aby zgromadzic te same elementy
+zachowujuc kolejnosc ich pierwszego wystapienia.*/
 #include <iostream>
 
 using namespace std;
