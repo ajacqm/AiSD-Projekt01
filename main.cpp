@@ -35,22 +35,47 @@ void sort(int tab[])
     }
 }
 
+void sort2(char tab[]) //drugi sposob obliczania
+{
+    char znacznik;
+    char tab2[n];
+    int z=0;
+    for(int i=0; i<n; i++)
+    {
+        if(tab[i] != '\0')
+        {
+            znacznik = tab[i];
+            for(int j=i; j<n; j++)
+            {
+                if(tab[j]==znacznik)
+                {
+                    cout << "BUG: I: " << tab[j] << " - " << znacznik << endl;
+                    tab2[z] = znacznik;
+                    tab[j] = '\0';
+                    z++;
+                    cout << "BUG: Z" << z <<endl;
+                }
+            }
+        }
+    }
+    for(int i=0; i<n; i++)
+    {
+        cout << "Element: " << i+1 << " jest rowny: " << tab2[i] << endl;
+    }
+
+}
 
 int main()
 {
     cout << "Wprowadz ilosc elementow: ";
     cin >> n;
-    int tab[n];
+    char tab[n];
     for(int i=0; i<n; i++)
     {
         cout << "Wprowadz " << i+1 << " element tablicy: ";
         cin >> tab[i];
     }
-    sort(tab); //Przekazanie tablicy do funkcji
-    for(int i=0; i<n; i++)
-    {
-        cout << "Element: " << i+1 << " jest rowny: " << tab[i] << endl;
-    }
+    sort2(tab); //Przekazanie tablicy do funkcji
 
     return 0;
 }
