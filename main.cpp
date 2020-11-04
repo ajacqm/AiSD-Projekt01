@@ -9,73 +9,41 @@ using namespace std;
 
 int n;
 
-void sort(int tab[])
+void sort(int tab[]) //Funkcja sortujaca elementy wzgledem ich wystapienia
 {
-    /*Ogolnie cel jest taki zeby przesuwac tablice w prawo*/
-    int znacznik, temp;
+    int znacznik=0;
     for(int i=0; i<n; i++)
     {
-        znacznik = tab[i];
-        for(int j=i+1; j<n; j++) //1+1 ? - sprawdzic pozniej czy jest okej
+        for(int j=i; j<n; j++)
         {
-            if(tab[i]!=tab[j])
+            if(tab[i]==tab[j])
             {
-                for(int k=j+1; k<n; k++)
+                for(int k=j; k>i+1; k--) //Petla malejaca - przestawiajaca elementy
                 {
-                    if(tab[k]==znacznik)
-                    {
-                        for(int p=k; p>j; p--)
-                        {
-                            swap(tab[p],tab[p-1]); //przesuwanie elementow tablicy
-                        }
-                    }
+                    swap(tab[k],tab[k-1]);// Funkcja przestawiajaca dwa elementy
                 }
             }
         }
     }
-}
-
-void sort2(char tab[]) //drugi sposob obliczania
-{
-    char znacznik;
-    char tab2[n];
-    int z=0;
-    for(int i=0; i<n; i++)
-    {
-        if(tab[i] != '\0')
-        {
-            znacznik = tab[i];
-            for(int j=i; j<n; j++)
-            {
-                if(tab[j]==znacznik)
-                {
-                    cout << "BUG: I: " << tab[j] << " - " << znacznik << endl;
-                    tab2[z] = znacznik;
-                    tab[j] = '\0';
-                    z++;
-                    cout << "BUG: Z" << z <<endl;
-                }
-            }
-        }
-    }
-    for(int i=0; i<n; i++)
-    {
-        cout << "Element: " << i+1 << " jest rowny: " << tab2[i] << endl;
-    }
-
 }
 
 int main()
 {
     cout << "Wprowadz ilosc elementow: ";
-    cin >> n;
-    char tab[n];
-    for(int i=0; i<n; i++)
+    cin >> n;//Deklaracja ilosci elementow tablicy
+    int tab[n];
+
+    for(int i=0; i<n; i++)//Wczytywanie elementow do tablicy
     {
         cout << "Wprowadz " << i+1 << " element tablicy: ";
         cin >> tab[i];
     }
-    sort2(tab); //Przekazanie tablicy do funkcji
 
+    sort(tab); //Wywolanie funkcji sort z przekazaniem tablicy tab
+
+    for(int i=0; i<n; i++)//Wypisywanie elementow z tablicy
+    {
+        cout << "Element: " << i+1 << " jest rowny: " << tab[i] << endl;
+    }
     return 0;
 }
