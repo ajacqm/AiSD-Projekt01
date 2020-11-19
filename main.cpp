@@ -3,24 +3,31 @@
 /*Uporzadkuj zadane tablice wielu powtarzajacych sie elementow, tak aby zgromadzic te same elementy
 zachowujuc kolejnosc ich pierwszego wystapienia.*/
 #include <iostream>
-#include <algorithm>
-
+#include <fstream>
+#include <vector>
 using namespace std;
 
-int n;
+vector <int> numbers;
+void swap(int a,int b)//Funkcja przestawiajaca dwa elementy
+{
+    int temp;
+    temp = numbers[a];
+    numbers[a] = numbers[b];
+    numbers[b] = temp;
+}
 
-void sort(int tab[]) //Funkcja sortujaca elementy wzgledem ich wystapienia
+void sort() //Funkcja sortujaca - wzgledem kolejnosci wystepowania elementow
 {
     int znacznik=0;
-    for(int i=0; i<n; i++)
+    for(int i=0; i<numbers.size(); i++)
     {
-        for(int j=i; j<n; j++)
+        for(int j=i; j<numbers.size(); j++)
         {
-            if(tab[i]==tab[j])
+            if(numbers[i]==numbers[j])
             {
                 for(int k=j; k>i+1; k--) //Petla malejaca - przestawiajaca elementy
                 {
-                    swap(tab[k],tab[k-1]);// Funkcja przestawiajaca dwa elementy
+                    swap(k,k-1);
                 }
             }
         }
@@ -29,21 +36,28 @@ void sort(int tab[]) //Funkcja sortujaca elementy wzgledem ich wystapienia
 
 int main()
 {
-    cout << "Wprowadz ilosc elementow: ";
-    cin >> n;//Deklaracja ilosci elementow tablicy
-    int tab[n];
+    ifstream input("input.txt");
+    ofstream output("output.txt");
+    int n;
 
-    for(int i=0; i<n; i++)//Wczytywanie elementow do tablicy
+    if(!input.good())
     {
-        cout << "Wprowadz " << i+1 << " element tablicy: ";
-        cin >> tab[i];
+        cerr << "File error";
+        return 1;
     }
-
-    sort(tab); //Wywolanie funkcji sort z przekazaniem tablicy tab
-
-    for(int i=0; i<n; i++)//Wypisywanie elementow z tablicy
+    else
     {
-        cout << "Element: " << i+1 << " jest rowny: " << tab[i] << endl;
+        while(!input.eof())
+        {
+            input >> n;
+            numbers.push_back(n);
+        }
+        sort();
+        for(int i=0; i<numbers.size();i++)
+        {
+            output << numbers[i] << "; ";
+        }
     }
     return 0;
 }
+
