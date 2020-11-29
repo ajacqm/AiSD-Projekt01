@@ -8,12 +8,12 @@ zachowujuc kolejnosc ich pierwszego wystapienia.*/
 using namespace std;
 
 vector <int> numbers;
-void swap(int a,int b)//Funkcja przestawiajaca dwa elementy
+void swap(int &a,int &b)//Funkcja przestawiajaca dwa elementy
 {
     int temp;
-    temp = numbers[a];
-    numbers[a] = numbers[b];
-    numbers[b] = temp;
+    temp = a;
+    a = b;
+    b = temp;
 }
 
 void sort() //Funkcja sortujaca - wzgledem kolejnosci wystepowania elementow
@@ -27,7 +27,7 @@ void sort() //Funkcja sortujaca - wzgledem kolejnosci wystepowania elementow
             {
                 for(int k=j; k>i+1; k--) //Petla malejaca - przestawiajaca elementy
                 {
-                    swap(k,k-1);
+                    swap(numbers[k],numbers[k-1]);
                 }
             }
         }
