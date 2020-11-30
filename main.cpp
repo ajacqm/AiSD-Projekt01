@@ -7,8 +7,8 @@ zachowujuc kolejnosc ich pierwszego wystapienia.*/
 #include <vector>
 using namespace std;
 
-vector <int> numbers;
-void swap(int &a,int &b)//Funkcja przestawiajaca dwa elementy
+
+void f_swap(int &a,int &b)//Funkcja przestawiajaca dwa elementy
 {
     int temp;
     temp = a;
@@ -16,19 +16,19 @@ void swap(int &a,int &b)//Funkcja przestawiajaca dwa elementy
     b = temp;
 }
 
-void sort() //Funkcja sortujaca - wzgledem kolejnosci wystepowania elementow
+void sort(vector <int> &numbers) //Funkcja sortujaca - wzgledem kolejnosci wystepowania elementow
 {
-    int znacznik=0;
     for(int i=0; i<numbers.size(); i++)
     {
-        for(int j=i; j<numbers.size(); j++)
+        for(int j=i+1; j<numbers.size(); j++)
         {
             if(numbers[i]==numbers[j])
             {
-                for(int k=j; k>i+1; k--) //Petla malejaca - przestawiajaca elementy
+                for(int k=j; k>i+1; k--)
                 {
-                    swap(numbers[k],numbers[k-1]);
+                    f_swap(numbers[k],numbers[k-1]);
                 }
+                i++; //Inkrementacja i, przestawia pierwszy wskaznik po znalezieniu liczby rownej numbers[i];
             }
         }
     }
@@ -39,7 +39,7 @@ int main()
     ifstream input("input.txt");
     ofstream output("output.txt");
     int n;
-
+    vector <int> numbers;
     if(!input.good())
     {
         cerr << "File error";
@@ -52,7 +52,7 @@ int main()
             input >> n;
             numbers.push_back(n);
         }
-        sort();
+        sort(numbers);
         for(int i=0; i<numbers.size();i++)
         {
             output << numbers[i] << "; ";
