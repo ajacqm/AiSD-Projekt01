@@ -2,7 +2,6 @@
 /*Jakub Matuszko Grupa 5*/
 /*Uporzadkuj zadane tablice wielu powtarzajacych sie elementow, tak aby zgromadzic te same elementy
 zachowujuc kolejnosc ich pierwszego wystapienia.*/
-#include <iostream>
 #include <fstream>
 #include <vector>
 using namespace std;
@@ -62,6 +61,8 @@ int main()
             output << numbers[i] << "; ";
         }
     }
+    input.close();
+    output.close();
     return 0;
 }
 
